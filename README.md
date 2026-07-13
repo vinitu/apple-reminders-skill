@@ -76,7 +76,7 @@ Backend policy:
 - `Makefile` - helper commands for dictionary dump, compile, and tests.
 - `scripts/commands/` - public shell command interface.
 - `scripts/applescripts/` - internal AppleScript backends in `<entity>/<action>.applescript` format.
-- `scripts/tests/` - live integration checks.
+- `tests/` - live integration checks.
 
 ## Command Surface
 

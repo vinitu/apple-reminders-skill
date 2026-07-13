@@ -9,7 +9,13 @@ Installed global skill directory: `~/.agents/skills/macos-reminders`.
 
 - Read this file, then `SKILL.md` for the full command list and usage.
 - Run all commands from the **repo root**: `./scripts/commands/<entity>/<action>.sh` or `scripts/commands/...`
-- Do not call `scripts/applescripts` directly; use only `scripts/commands`.
+
+## Public interface and internal backend
+
+- `scripts/commands/` is the only public command surface. Run commands from the repo root with paths like `scripts/commands/<entity>/<action>.sh`.
+- `scripts/applescripts/` is the internal backend. Do not call AppleScript files directly from skill instructions.
+- `scripts/tools/reminderkit_helper.m` is an internal ReminderKit helper compiled and used by reminder commands.
+- Only commands listed in `SKILL.md` are public. Other scripts may exist for internal use or legacy cleanup.
 
 ## Goal
 
@@ -31,7 +37,7 @@ Installed global skill directory: `~/.agents/skills/macos-reminders`.
 - **scripts/commands/** — public shell interface (run from repo root).
 - **scripts/applescripts/account|list|reminder/** — internal AppleScript entrypoints (invoked via `osascript` by the command scripts).
 - **scripts/commands/reminder/reminder_normalize.jq** — maps remindctl JSON to the reminder shape (priority can be `0/1/5/9` or `"none"/"low"/"medium"/"high"`); used by list, today, today-or-overdue, upcoming, due-before, due-range (overdue.sh uses inline jq).
-- **scripts/tests/** — live integration checks for Reminders.app.
+- **tests/** — live integration checks for Reminders.app.
 
 ## Example (overdue)
 
