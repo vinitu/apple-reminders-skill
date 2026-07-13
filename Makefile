@@ -12,6 +12,10 @@ dictionary-reminders:
 dictionary-standard:
 	@cat /System/Library/ScriptingDefinitions/CocoaStandard.sdef
 
+check:
+	@osascript -e 'tell application "Reminders" to get name' >/dev/null 2>&1 || { echo "check: Reminders.app not available"; exit 1; }
+	@echo "Reminders.app is available"
+
 compile:
 	@set -euo pipefail; \
 	find scripts/applescripts -name '*.applescript' -print | while IFS= read -r file; do \
@@ -22,7 +26,7 @@ compile:
 test: test-dictionary test-smoke
 
 test-dictionary:
-	@bash scripts/tests/dictionary_contract.sh
+	@bash tests/dictionary_contract.sh
 
 test-smoke:
-	@bash scripts/tests/smoke_reminders.sh
+	@bash tests/smoke_reminders.sh
